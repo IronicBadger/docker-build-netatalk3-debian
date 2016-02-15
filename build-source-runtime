@@ -1,0 +1,20 @@
+#!/bin/bash
+# build netatalk at container runtime
+
+NETATALK_VERSION="3.1.8"
+
+wget https://sourceforge.net/projects/netatalk/files/netatalk/$NETATALK_VERSION/netatalk-$NETATALK_VERSION.tar.gz
+tar -xvf netatalk-$NETATALK_VERSION.tar.gz
+cd netatalk-$NETATALK_VERSION
+./configure \
+        --with-init-style=debian-systemd \
+        --without-libevent \
+        --without-tdb \
+        --with-cracklib \
+        --enable-krbV-uam \
+        --with-pam-confdir=/etc/pam.d \
+        --with-dbus-sysconf-dir=/etc/dbus-1/system.d \
+        --with-tracker-pkgconfig-version=1.0
+make -j4
+checkinstall -Dy --install=no --nodoc make
+cp *.deb /artifact
