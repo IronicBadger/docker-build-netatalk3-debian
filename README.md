@@ -38,3 +38,36 @@ Edit `/usr/local/etc/afp.conf`
     time machine = yes
     vol size limit = 512000
 ```
+
+### Starting the service
+
+```sh
+systemctl enable avahi-daemon
+systemctl enable netatalk
+systemctl start avahi-daemon
+systemctl start netatalk
+```
+
+### Spotlight
+
+If you use Spotlight feature, read Spotlight section in Netatalk Manual.
+Set `spotlight = yes` and `dbus daemon = /usr/bin/dbus-daemon`.
+Set `spotlight = no` for Time Machine's volume. The mining for sparsebundle is wasteful.
+
+```sh
+[Global]
+    spotlight = yes
+    dbus daemon = /usr/bin/dbus-daemon
+
+[Homes]
+    basedir regex = /home
+
+[Test Volume]
+    path = /export/test1
+
+[My Time Machine Volume]
+    path = /export/timemachine
+    time machine = yes
+    spotlight = no
+    vol size limit = 512000
+```
