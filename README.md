@@ -8,7 +8,7 @@ Currently this container builds version `3.1.8` of netatalk.
 
 ```sh
 mkdir ~/artifact
-docker run -it --rm ~/artifact:/artifact ironicbadger/build-netatalk3-debian
+docker run -it --rm -v ~/artifact:/artifact ironicbadger/build-netatalk3-debian
 docker rmi ironicbadger/build-netatalk3-debian
 dpkg -i ~/artifact/*.deb
 ```
