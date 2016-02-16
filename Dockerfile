@@ -3,8 +3,8 @@ MAINTAINER IronicBadger <ironicbadger@linuxserver.io>
 
 # Builds netatalk
 # http://netatalk.sourceforge.net/wiki/index.php/Install_Netatalk_3.1.8_on_Debian_8_Jessie
-RUN apt-get update
-RUN apt-get install -y \
+RUN apt-get update && \
+    apt-get install -y \
       build-essential \
       libevent-dev \
       libssl-dev \
@@ -28,8 +28,8 @@ RUN apt-get install -y \
       libtracker-sparql-1.0-dev \
       libtracker-miner-1.0-dev \
       wget \
-      checkinstall
-RUN mkdir -p /app/build && \
+      checkinstall && \
+    mkdir -p /app/build && \
     mkdir /artifact
 ADD build-source-runtime /app/
 WORKDIR /app
